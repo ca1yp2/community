@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="net.ca1yps.community.mapper.BoardAdminMapper">
+  	<select id="getBoardAdmin" parameterType="int" resultType="Admin">
+  		select * from board_admin where id = #{id}
+  	</select>
+  	<select id="allList" resultType="Admin">
+  		select ba.id, ba.btitle, ba.skin, ba.category, ba.listcount, ba.pagecount, ba.lgrade, ba.vgrade, ba.rgrade, ba.fgrade, ba.fdgrade, ba.cgrade, ba.regrade, ba.upload, ba.filesize, ba.allfilesize, ba.thimgsize, ba.filechar, ba.sec, count(b.id) as bbsCount from board_admin ba left join board b on ba.id = b.bbsid group by ba.id order by ba.id desc
+  	</select>
+  	<insert id="setBoardAdmin" parameterType="String">
+  		insert into board_admin (btitle) value(#{btitle})
+  	</insert>
+  	<update id="updateBoardAdmin" parameterType="Admin">
+  		update board_admin set btitle = #{btitle}, skin = #{skin}, category = #{category}, listcount = #{listcount}, pagecount = #{pagecount}, lgrade = #{lgrade}, vgrade = #{vgrade}, rgrade = #{rgrade}, fgrade = #{fgrade}, cgrade = #{cgrade}, regrade = #{regrade}, upload = #{upload}, filesize = #{filesize}, allfilesize = #{allfilesize}, thimgsize = #{thimgsize}, filechar = #{filechar}, sec = #{sec} where id = #{id}
+  	</update>
+  	<delete id="deleteBoardAdmin" parameterType="int">
+  		delete from board_admin where id = #{id}
+  	</delete>
+  	
+  	<!-- category -->
+  	<select id="allCategoryByBoardId" parameterType="int" resultType="Category">
+  		select * from category where bid=#{id} order by category_num
+  	</select>
+  	
+  	<!-- File 옵션 따로 관리 -->
+  	<update id="updateBoardFileAdmin" parameterType="Admin">
+  		update board_admin set filesize=#{filesize}, allfilesize = #{allfilesize}, thimgsize = #{thimgsize}, filechar = #{filechar} where id=#{id}
+  	</update>
+  </mapper>

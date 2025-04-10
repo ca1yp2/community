@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="net.ca1yps.community.mapper.UsersMapper">
+  	<select id="allUsers" resultType="Users">
+  		select * from users order by id desc;
+  	</select>
+  	<select id="getUserForUserid" parameterType="String" resultType="Users">
+  		select * from users where userid = #{userid};
+  	</select>
+  	<insert id="setInsertUser" parameterType="Users">
+  		insert into users (userid, userpass, username, useremail, usertel, zipcode, address,detail_address, extra_address, userimg, userprofile, userip) values(#{userid}, #{userpass}, #{username}, #{useremail}, #{usertel}, #{zipcode}, #{address}, #{detail_address}, #{extra_address}, #{userimg}, #{userprofile}, #{userip})
+  	</insert>
+  	<update id="setUpdateuser" parameterType="Users">
+  		update users set userpass = #{userpass}, username = #{username}, useremail = #{useremail}, usertel = #{usertel}, zipcode = #{zipcode}, address = #{address}, detail_address = #{detail_address}, extra_address = #{extra_address}, userimg = #{userimg}, userprofile = #{userprofile}, edit_at=NOW(), role = #{role}, userip = #{userip} where id =#{id};
+  	</update>
+  	<delete id="setDeleteUser" parameterType="int">
+  		delete from users where id = #{id};
+  	</delete>
+  </mapper>

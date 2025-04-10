@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="net.ca1yps.community.mapper.FileMapper">
+  	<insert id="insertFile" parameterType="FileDTO">
+  		insert into files (bid, ofilename, nfilename, ext, filesize) values(#{bid}, #{ofilename}, #{nfilename}, #{ext}, #{filesize})
+  	</insert>
+  	
+  	<update id="updateFileByBid" parameterType="Map">
+  		update files set bid=#{bid} where bid=#{tempId}
+  	</update>
+  	
+  	<delete id="deleteFile" parameterType="long">
+  		delete from files where id=#{id}
+  	</delete>
+  	
+  	<select id="selectFileByBid" parameterType="long" resultType="FileDTO">
+  		select * from files where bid=#{bid}
+  	</select>
+  	
+  	<select id="fileById" parameterType="long" resultType="FileDTO">
+  		select * from where id=#{id}
+  	</select>
+  	
+  	<select id="fileByFileName" parameterType="String" resultType="FileDTO">
+  		select * from files where nfilename=#{fname}
+  	</select>
+  </mapper>
